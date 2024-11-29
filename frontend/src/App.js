@@ -1,9 +1,10 @@
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Card } from 'react-bootstrap';
 import './App.css';
 import { useState, useEffect } from 'react';
 
 function App() {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([]);
+
   useEffect(() => {
     const fetchTasks = async () => {
       try {
@@ -12,42 +13,33 @@ function App() {
           const data = await response.json();
           setTasks(data);
         } else {
-          setTasks(null);
+          setTasks([]);
         }
       } catch (error) {
         console.error('Can not fetch API', error);
       }
     };
-  
     fetchTasks();
-  }, []); 
-  
+  }, []);
 
   return (
     <Container>
-      <Row>
-        <Col>
-          <div id="header">
-            Task-Tracker
-          </div>
-        </Col>
-        <Row>
+      <div id="header">
+        <h1>Task-Tracker</h1>
+      </div>
+      <div className="task-grid">
         {tasks.map((task, index) => (
-          <Col key={index} sm={12} md={6} lg={4} className="mb-4">
-            <Card>
-              <Card.Body>
-                <Card.Title>{task.title}</Card.Title>
-                <Card.Text>{task.description}</Card.Text>
-                <Card.Text>
-                  <strong>Status:</strong> {task.completed ? "Completed" : "Not Completed"}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
+          <Card key={index} className="task-card">
+            <Card.Body>
+              <Card.Title>{task.title}</Card.Title>
+              <Card.Text>{task.description}</Card.Text>
+              <Card.Text>
+                <strong>Status:</strong> {task.completed ? "Completed" : "Not Completed"}
+              </Card.Text>
+            </Card.Body>
+          </Card>
         ))}
-      </Row>
-        
-      </Row>
+      </div>
     </Container>
   );
 }

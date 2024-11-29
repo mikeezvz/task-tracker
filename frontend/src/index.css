@@ -1,18 +1,22 @@
-#header{
+#header {
   background-color: black;
-  color:white;
+  color: white;
   text-align: center;
-  width: 45%;
-  height: 6vh;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
   margin: auto;
+  width: 50%;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
 }
 
-.Card-Body{
-  background-color: gray;
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 Cards nebeneinander */
+  gap: 20px; /* Abstand zwischen den Cards */
 }
 
+.task-card {
+  background-color: #f8f9fa; /* Heller Hintergrund für die Cards */
+  border-radius: 5px;
+  padding: 15px;
+}

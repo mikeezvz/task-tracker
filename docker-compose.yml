@@ -1,0 +1,20 @@
+services:
+  # Server service (Backend)
+  backend:
+    build:
+      context: ./backend  # Ordnername für Backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "5000:5000"
+
+  # Client service (Frontend)
+  frontend:
+    build:
+      context: ./frontend  # Ordnername für Frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend

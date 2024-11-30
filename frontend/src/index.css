@@ -11,12 +11,18 @@
 
 .task-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 Cards nebeneinander */
-  gap: 20px; /* Abstand zwischen den Cards */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 20px;
 }
 
 .task-card {
-  background-color: #f8f9fa; /* Heller Hintergrund für die Cards */
+  background-color: #f8f9fa;
   border-radius: 5px;
   padding: 15px;
+}
+
+.new-task{
+  padding: 20px;
+  width: 40%;
+  background-color: #f8f9fa;
 }

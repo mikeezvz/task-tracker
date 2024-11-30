@@ -27,7 +27,7 @@ router.post('/new', async (request, response) => {
     const doc = new Task({
         title: request.body.title,
         description: request.body.description,
-        completed: request.body.completed
+        completed: false
       });
     const savedTask = await doc.save();
     response.status(201).json(savedTask)
@@ -36,8 +36,23 @@ router.post('/new', async (request, response) => {
     catch (error) {
         response.status(500).send('Document can not be saved')
         console.error('Error saving task:', error)
-    }
-
+    }    
 });
+
+router.delete('delete/:id', async (req, res) => {
+    try {
+      const taskId = req.params.id; 
+      const deletedTask = await Task.findByIdAndDelete(taskId); 
+  
+      if (!deletedTask) {
+        return res.status(404).json({ message: 'Task not found' });
+      }
+  
+      res.status(200).json({ message: 'Task deleted successfully' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error deleting task', error: error.message });
+    }
+  });
+
 
 module.exports = router;

@@ -5,6 +5,8 @@ const app = express();
 const port = 5000;
 const session = require('express-session');
 const router = express.Router();
+require('dotenv').config();
+
 
 app.use(express.json());
 app.use(cors());
@@ -14,15 +16,17 @@ app.use(session({
     saveUninitialized: true
 }));
 
+const mongoURL = process.env.MONGO_URL
+
 const connectDB = async () => {
     try {
-      await mongoose.connect('mongodb+srv://mike_zvz:mn0tavRJAiW1bsEr@tasks.vnvee.mongodb.net/task-tracker', {
+      await mongoose.connect(mongoURL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });
       console.log('Connection to MongoDB successful');
     } catch (error) {
-      console.error('Verbindung zu MongoDB fehlgeschlagen:', error);
+      console.error('Failed to connect to MongoDB', error);
       process.exit(1);
     }
   };

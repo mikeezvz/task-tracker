@@ -6,11 +6,12 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [newDescription, setNewDescription] = useState("");
   const [newTitle, setNewTitle] = useState("");
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch('http://backend:5000/tasks/all');
+        const response = await fetch(`${backendUrl}/tasks/all`);
         if (response.ok) {
           const data = await response.json();
           setTasks(data);
@@ -46,7 +47,7 @@ function App() {
 
   
     try {
-      const response = await fetch('http://backend:5000/tasks/new', {
+      const response = await fetch(`${backendUrl}/tasks/new`, {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json', 
@@ -69,7 +70,7 @@ function App() {
 
   const handleDelete = async (taskId) => {
     try {
-      const response = await fetch(`http://backend:5000/tasks/delete/${taskId}`, {
+      const response = await fetch(`${backendUrl}/tasks/delete/${taskId}`, {
         method: 'DELETE',
       });
   

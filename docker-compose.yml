@@ -1,19 +1,21 @@
 services:
-  # Server service (Backend)
+
   backend:
     build:
-      context: ./backend  # Ordnername für Backend
+      context: ./backend
       dockerfile: Dockerfile
     container_name: backend
     ports:
       - "5000:5000"
 
-  # Client service (Frontend)
+ 
   frontend:
     build:
-      context: ./frontend  # Ordnername für Frontend
+      context: ./frontend  
       dockerfile: Dockerfile
     container_name: frontend
+    environment:
+      - MONGO_URL=mongodb+srv://mike_zvz:mn0tavRJAiW1bsEr@tasks.vnvee.mongodb.net/task-tracker
     ports:
       - "80:80"
     depends_on:

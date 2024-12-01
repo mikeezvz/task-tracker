@@ -23,7 +23,7 @@ function App() {
       }
     };
     fetchTasks();
-  }, []);
+  }, [backendUrl]);
 
  
   const handleTitleChange = (e) => {

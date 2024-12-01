@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require ('cors')
 const mongoose = require('mongoose');
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 const session = require('express-session');
 const router = express.Router();
 require('dotenv').config();
@@ -36,6 +36,6 @@ const connectDB = async () => {
 const tasksRoute = require('./routes/tasks');
 app.use('/tasks', tasksRoute);
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}/`);
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Server running on port ${port}`);
 });

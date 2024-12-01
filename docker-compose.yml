@@ -3,20 +3,26 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
     container_name: backend
-    ports:
-      - "5000:5000"
-
- 
-  frontend:
-    build:
-      context: ./frontend  
-      dockerfile: Dockerfile
-    container_name: frontend
     environment:
       - MONGO_URL=mongodb+srv://mike_zvz:mn0tavRJAiW1bsEr@tasks.vnvee.mongodb.net/task-tracker
     ports:
-      - "80:80"
+      - "5000:5000"
+    networks:
+      - app_network
+
+  frontend:
+    build:
+      context: ./frontend  
+    container_name: frontend
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:5000
+    ports:
+      - "3000:3000"
     depends_on:
       - backend
+    networks:
+      - app_network
+
+networks:
+  app_network:

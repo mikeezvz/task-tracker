@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:18
 
 WORKDIR /app
 
@@ -8,9 +8,6 @@ RUN npm install
 
 COPY . .
 
-ARG MONGO_URL
-ENV MONGO_URL=${MONGO_URL}
-
 EXPOSE 5000
 
-CMD ["node", "server.js"]   
+CMD ["npm", "start"]   

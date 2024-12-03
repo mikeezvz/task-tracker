@@ -39,10 +39,10 @@ router.post('/new', async (request, response) => {
     }    
 });
 
-router.delete('delete/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
     try {
-      const taskId = req.params.id; 
-      const deletedTask = await Task.findByIdAndDelete(taskId); 
+      const {id} = req.params; 
+      const deletedTask = await Task.findByIdAndDelete(id); 
   
       if (!deletedTask) {
         return res.status(404).json({ message: 'Task not found' });

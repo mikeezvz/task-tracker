@@ -7,6 +7,7 @@ function App() {
   const [newDescription, setNewDescription] = useState("");
   const [newTitle, setNewTitle] = useState("");
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  console.log(backendUrl)
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -72,6 +73,9 @@ function App() {
     try {
       const response = await fetch(`${backendUrl}/tasks/delete/${taskId}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
   
       if (response.ok) {
@@ -87,6 +91,7 @@ function App() {
   
 
   return (
+    
     <Container>
       <div id="header">
         <h1>Task-Tracker</h1>
